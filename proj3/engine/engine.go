@@ -285,7 +285,7 @@ func (pos Position) Value(m Move) int {
 	p := Piece(pos.board[i])
 	q := Piece(pos.board[j])
 	score := pst[p][j] - pst[p][i] // score of the direct move
-	if q != '.' && q != ' ' && q.MySide() {
+	if q != '.' && q != ' ' && !q.MySide() {
 		score += pst[q.Flip()][j.Flip()]
 	}
 	// castling
@@ -316,3 +316,112 @@ func (pos Position) Value(m Move) int {
 var MateValue = 75000
 var MaxTableSize = 10000000
 var EvalRoughness = 13
+
+// https://en.wikipedia.org/wiki/Game_of_the_Century_(chess)
+func NewFischerImmortalGameBoard() Board {
+	var b Board
+	// padding
+	for i := 0; i <= 20; i++ {
+		b[i] = ' '
+	}
+	b[21] = 'r'
+	b[22] = '.'
+	b[23] = '.'
+	b[24] = 'q'
+	b[25] = '.'
+	b[26] = 'r'
+	b[27] = 'k'
+	b[28] = '.'
+	b[29] = ' '
+	b[30] = ' '
+	b[31] = 'p'
+	b[32] = 'p'
+	b[33] = '.'
+	b[34] = '.'
+	b[35] = 'p'
+	b[36] = 'p'
+	b[37] = 'b'
+	b[38] = 'p'
+	b[39] = ' '
+	b[40] = ' '
+	b[41] = '.'
+	b[42] = 'n'
+	b[43] = 'p'
+	b[44] = '.'
+	b[45] = '.'
+	b[46] = 'n'
+	b[47] = '.'
+	b[48] = '.'
+	b[49] = ' '
+	b[50] = ' '
+	b[51] = '.'
+	b[52] = '.'
+	b[53] = 'Q'
+	b[54] = '.'
+	b[55] = '.'
+	b[56] = '.'
+	b[57] = 'B'
+	b[58] = '.'
+	b[59] = ' '
+	b[60] = ' '
+	b[61] = '.'
+	b[62] = '.'
+	b[63] = '.'
+	b[64] = 'P'
+	b[65] = 'P'
+	b[66] = '.'
+	b[67] = 'b'
+	b[68] = '.'
+	b[69] = ' '
+	b[70] = ' '
+	b[71] = '.'
+	b[72] = '.'
+	b[73] = 'N'
+	b[74] = '.'
+	b[75] = '.'
+	b[76] = 'N'
+	b[77] = '.'
+	b[78] = '.'
+	b[79] = ' '
+	b[80] = ' '
+	b[81] = 'P'
+	b[82] = 'P'
+	b[83] = '.'
+	b[84] = '.'
+	b[85] = '.'
+	b[86] = 'P'
+	b[87] = 'P'
+	b[88] = 'P'
+	b[89] = ' '
+	b[90] = ' '
+	b[91] = '.'
+	b[92] = '.'
+	b[93] = '.'
+	b[94] = 'R'
+	b[95] = 'K'
+	b[96] = 'B'
+	b[97] = '.'
+	b[98] = 'R'
+	b[99] = ' '
+	b[100] = ' '
+
+	// padding
+	for i := 100; i < 120; i++ {
+		b[i] = ' '
+	}
+
+	return b.Flip()
+
+}
+
+func NewFischerPosition() Position {
+	p := Position{
+		board:          NewFischerImmortalGameBoard(),
+		Score:          0,
+		white_castling: [2]bool{false, true},
+		black_castling: [2]bool{false, false},
+		en_passant:     0,
+		king_capture:   0,
+	}
+	return p
+}
