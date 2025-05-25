@@ -1,6 +1,6 @@
 package engine
 
-// Backend chess engine code based on overview provided at
+// Backend chess engine code thanks to overview provided at
 // https://zserge.com/posts/carnatus/
 
 type Piece byte

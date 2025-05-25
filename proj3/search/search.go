@@ -1,7 +1,6 @@
 package search
 
 import (
-	"fmt"
 	"math"
 	"math/rand"
 	"proj3-redesigned/deque"
@@ -15,6 +14,7 @@ import (
 * https://www.chessprogramming.org/Alpha-Beta
 * depth is half-move 'plies', i.e. a depth of 6 is 6 half-moves and
 * 3 full moves (white and black each move)
+* https://www.chessprogramming.org/Depth
  */
 func negamax(p engine.Position, depth, alpha, beta int) int {
 	if depth == 0 {
@@ -227,6 +227,6 @@ func SearchOneMoveTree(id int, m engine.Move, movePos engine.Position, depth int
 	alpha := math.MinInt32
 	beta := math.MaxInt32
 	score = -negamax(movePos, depth-1, -beta, -alpha)
-	fmt.Printf("Thread ID %d for move %s, Score: %d\n", id, m, score)
+	// fmt.Printf("Thread ID %d for move %s, Score: %d\n", id, m, score)
 	return score
 }
