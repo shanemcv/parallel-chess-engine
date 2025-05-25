@@ -67,13 +67,10 @@ func SearchBestMove(start engine.Position, depth int) (bestMove engine.Move, bes
 func SearchBestMoveParallel(start engine.Position, depth int) (bestMove engine.Move, bestScore int) {
 	bestScore = math.MinInt32
 	alpha := math.MinInt32
-	// beta := math.MaxInt32
 
 	moves := start.Moves()
 	var (
 		mu sync.Mutex
-		// cond = sync.NewCond(&mu)
-		// completed int
 		wg sync.WaitGroup
 	)
 
@@ -111,13 +108,10 @@ func SearchBestMoveParallel(start engine.Position, depth int) (bestMove engine.M
 func SearchBestMoveParallelFixedThreadCount(start engine.Position, depth int, numThreads int) (bestMove engine.Move, bestScore int) {
 	bestScore = math.MinInt32
 	alpha := math.MinInt32
-	// beta := math.MaxInt32
 
 	moves := start.Moves()
 	var (
 		mu sync.Mutex
-		// cond = sync.NewCond(&mu)
-		// completed int
 		wg sync.WaitGroup
 	)
 
@@ -164,13 +158,10 @@ func SearchBestMoveParallelFixedThreadCount(start engine.Position, depth int, nu
 func SearchBestMoveParallelWorkStealing(start engine.Position, depth int, numThreads int, capacity int) (bestMove engine.Move, bestScore int) {
 	bestScore = math.MinInt32
 	alpha := math.MinInt32
-	// beta := math.MaxInt32
 
 	moves := start.Moves()
 	var (
 		mu sync.Mutex
-		// cond = sync.NewCond(&mu)
-		// completed int
 		wg sync.WaitGroup
 	)
 

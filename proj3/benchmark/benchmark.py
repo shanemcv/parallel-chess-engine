@@ -30,6 +30,7 @@ for mode in modes:
     for num in threads:
         total = 0.0
         for i in range(runs):
+            print(".")
             command = ["go", "run", "main.go", mode, str(num), start_pos, str(depth)]
             output = subprocess.check_output(command, cwd=run_directory).decode("utf-8")
             if mode == "s":
